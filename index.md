@@ -29,5 +29,5 @@
 
 ### In-Class Exercises
 - <a href="exercises/creating_a_list.html" class="clicky_log_download">Creating A List</a>
-- <a href="exampels/list_indexing.html" class="clicky_log_download">List Indexing</a>
-- <a href="examples/list_slicing.html" class="clicky_log_download">List Slicing</a>
+- <a href="exercises/list_indexing.html" class="clicky_log_download">List Indexing</a>
+- <a href="exercises/list_slicing.html" class="clicky_log_download">List Slicing</a>
