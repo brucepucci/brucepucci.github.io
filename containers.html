@@ -601,6 +601,290 @@ fruit[0:5:2]
 
 ![](https://media.giphy.com/media/3og0IMJcSI8p6hYQXS/giphy.gif)
 
+---
+class: middle
+
+# List Mutability
+
+As discussed before lists are __mutable__, meaning we can change their value after they are created. There are a number of way in which we can do this. In general, there are 2 ways in which this happens.
+
+* We can directly index or slice elements and assign values to them.
+	* The previously existing value gets overwritten.
+* Use list __methods__ to change a list __in-place__.
+	* No assignment operator is needed for this.
+
+A __method__ is kind of like a function, but it belongs to a specific data type. Functions can be used throughout the language, methods can only be used on an instance of it's own class.
+
+---
+# Changing values in a list
+
+We can slice or index our list and directly assign a value (or group of values) to it.
+
+```python
+my_list = ['a', 'd', 'c']
+```
+
+```python
+['a', 'd', 'c']
+```
+
+---
+# Changing values in a list
+
+We can slice or index our list and directly assign a value (or group of values) to it.
+
+```python
+my_list = ['a', 'd', 'c']
+*my_list[1] = 'b'    # Change the second element to 'b'
+```
+
+```python
+['a', 'b', 'c']
+```
+
+---
+# Changing values in a list
+
+We can slice or index our list and directly assign a value (or group of values) to it.
+
+```python
+my_list = ['a', 'd', 'c']
+*my_list[1:] = ['b', 'd']    # Change last 2 items using slice syntax
+```
+
+```python
+['a', 'b', 'd']
+```
+
+---
+# Changing values in a list
+
+We can slice or index our list and directly assign a value (or group of values) to it.
+
+```python
+my_list = ['a', 'd', 'c']
+my_list[1] = 'b'
+*my_list[3] = 'l'    # Cannot add an element to the end of our list like this
+```
+
+```python
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: list assignment index out of range
+```
+
+---
+# Changing values in a list
+
+We can slice or index our list and directly assign a value (or group of values) to it.
+
+```python
+my_list = ['a', 'd', 'c']
+my_list[1] = 'b'
+*my_list[2] = [1, 2, 3]    # We can change the item to anything we want.
+```
+
+```python
+['a', 'b', [1, 2, 3]]
+```
+
+---
+# Changing values in a list
+
+We can slice or index our list and directly assign a value (or group of values) to it.
+
+```python
+my_list = ['a', 'd', 'c']
+my_list[1] = 'b'
+my_list[2] = [1, 2, 3]
+*my_list[2][0] = [4, 5, 6]   # it works for lists in lists as well
+```
+
+```python
+['a', 'b', [[4, 5, 6], 2, 3]]
+```
+
+---
+# Changing values in a list
+
+We can slice or index our list and directly assign a value (or group of values) to it.
+
+```python
+my_list = ['a', 'd', 'c']
+my_list[1] = 'b'
+my_list[2] = [1, 2, 3]
+my_list[2][0] = [4, 5, 6]
+*del my_list[2]   # The del keyword deletes (technically dereferences) a Python object
+```
+
+```python
+['a', 'b']
+```
+
+---
+# Changing values in a list
+
+We can slice or index our list and directly assign a value (or group of values) to it.
+
+```python
+my_list = ['a', 'd', 'c']
+my_list[1] = 'b'
+my_list[2] = [1, 2, 3]
+my_list[2][0] = [4, 5, 6]
+del my_list[2]
+*del my_list   # We can even delete the whole darn thing
+```
+
+```python
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'my_list' is not defined
+```
+
+---
+class: middle
+
+# The `del` keyword and object dereferencing
+
+In Python we say that a variable references a value. When we use `del` on a variable we __dereference__ that value from the variable. During this process we also remove the variable name from our namespace.
+
+Python occasionally looks around for values with no references and deletes from memory. This process is called "garbage collections".
+---
+
+class: middle
+
+# Exercises
+
+[Changing List Values](https://brucepucci.github.io/exercises/changing_list_values.html)
+
+---
+class: middle
+
+# OK, so the next bit of the presentation takes no logical order. It's kind of just a random walk through useful list operations...
+
+---
+# Testing for inclusion
+
+We can test for a value's inclusion in an object with the keyword `in`.
+
+```python
+my_list = [1, 2, 3, 4, 5]
+*2 in my_list
+```
+
+```python
+True
+```
+
+---
+# Testing for inclusion
+
+We can test for a value's inclusion in an object with the keyword `in`.
+
+```python
+my_list = [1, 2, 3, 4, 5]
+*5 not in my_list   # `not` in from of `in` reverses the return value
+```
+
+```python
+False
+```
+
+---
+# Sorting a list
+
+`sorted()` is a built-in function that works on a variety of data types, but is especially useful for `list`. `sorted()` returns a copy of the list given to it with a potential different order.
+
+
+```python
+my_list = [5, 1, 4, 2, 9]
+*my_list = sorted(my_list)   # Does not change my_list, just returns a sorted copy of it
+```
+
+```python
+[1, 2, 4, 5, 9]
+```
+
+---
+# Sorting a list
+
+`sorted()` is a built-in function that works on a variety of data types, but is especially useful for `list`. `sorted()` returns a copy of the list given to it with a potential different order.
+
+
+```python
+my_list = ['c', 'd', 'a', '5', 'A']
+*my_list = sorted(my_list)      # Works on strings too... But how?
+```
+
+```python
+['5', 'A', 'a', 'c', 'd']
+```
+
+---
+# Sorting a list
+
+`sorted()` is a built-in function that works on a variety of data types, but is especially useful for `list`. `sorted()` returns a copy of the list given to it with a potential different order.
+
+
+```python
+my_list = ['c', 'd', 'a', '5', 'A']
+*my_list = sorted(my_list)      # Works on strings too... But how?
+```
+
+```python
+['5', 'A', 'a', 'c', 'd']
+```
+
+`sorted()` sorts character by character based on their ASCII values. If interested see the ASCII table [here](https://www.researchgate.net/profile/Firas_Jassim2/publication/244989821/figure/tbl1/AS:669549728907274@1536644503556/The-most-95-common-ASCII-characters.png).
+
+---
+# Sorting a list
+
+`sorted()` is a built-in function that works on a variety of data types, but is especially useful for `list`. `sorted()` returns a copy of the list given to it with a potential different order.
+
+
+```python
+my_list = ['Apple', 'aapl', 'apple', 'APPLE', 'APPLES']
+*my_list = sorted(my_list)      # Character-by-character
+```
+
+```python
+['APPLE', 'APPLES', 'Apple', 'aapl', 'apple']
+```
+
+---
+# Sorting a list
+
+`sorted()` is a built-in function that works on a variety of data types, but is especially useful for `list`. `sorted()` returns a copy of the list given to it with a potential different order.
+
+
+```python
+my_list = ['c', 'd', 'a', '5', 'A']
+*my_list[0] = 12      # Change to an integer
+*my_list = sorted(my_list)      # Breaks when types aren't the same
+```
+
+```python
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: '<' not supported between instances of 'int' and 'str'
+```
+
+---
+# Sorting a list
+
+`sorted()` is a built-in function that works on a variety of data types, but is especially useful for `list`. `sorted()` returns a copy of the list given to it with a potential different order.
+
+
+```python
+*sorted('fdfdasfgthgafd')    # Works on strings too
+```
+
+```python
+['a', 'a', 'd', 'd', 'd', 'f', 'f', 'f', 'f', 'g', 'g', 'h', 's', 't']
+```
+
+
 		</textarea>
 		<script>require=(function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require=="function"&&require;if(!s&&o)return o(n,!0);if(r)return r(n,!0);throw new Error("Cannot find module '"+n+"'")}var u=t[n]={exports:{}};e[n][0].call(u.exports,function(t){var r=e[n][1][t];return i(r?r:t)},u,u.exports)}return t[n].exports}var r=typeof require=="function"&&require;for(var s=0;s<n.length;s++)i(n[s]);return i})({"components/printing":[function(require,module,exports){
 module.exports=require('yoGRCZ');
