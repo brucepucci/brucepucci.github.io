@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>ps3_solutions</title>
+<title>ps4_solutions</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13093,7 +13093,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Assignment-#3---Lists-and-for-loops">Assignment #3 - Lists and for loops<a class="anchor-link" href="#Assignment-#3---Lists-and-for-loops">&#182;</a></h1><p>This assignment is worth 10 points. You will need to fill in your solutions between the comments "### BEGIN SOLUTION" and "### END SOLUTION". The requirements for each problem will be defined in a multi-line string at the top of each function. If your function fails any of the tests, either in this notebook or ones that I define outside of this notebook, the exercise will be marked incorrect.</p>
+<h1 id="Assignment-#4---Dictionaries-and-for-loops">Assignment #4 - Dictionaries and for loops<a class="anchor-link" href="#Assignment-#4---Dictionaries-and-for-loops">&#182;</a></h1><p>This assignment is worth 10 points. You will need to fill in your solutions between the comments "### BEGIN SOLUTION" and "### END SOLUTION". The requirements for each problem will be defined in a multi-line string at the top of each function. If your function fails any of the tests, either in this notebook or ones that I define outside of this notebook, the exercise will be marked incorrect.</p>
 
 </div>
 </div>
@@ -13164,12 +13164,20 @@ def example(a):
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">exercise_1</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Assume `my_list` is a list of all numeric values, `my_list` has at least 2 items</span>
-<span class="sd">    Return a list</span>
-<span class="sd">    Goal: Return a list containing the 2 largest values in a</span>
+<span class="sd">    Assume `my_list` is a list of all strings</span>
+<span class="sd">    Return a dict</span>
+<span class="sd">    Goal: Return a dict that is keyed by each unique value in</span>
+<span class="sd">          my_list and it&#39;s value is the count of times that</span>
+<span class="sd">          item appears</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">### BEGIN SOLUTION</span>
-    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">my_list</span><span class="p">)[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span>
+    <span class="n">return_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">my_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">return_dict</span><span class="p">:</span>
+            <span class="n">return_dict</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">return_dict</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">return_dict</span>
     <span class="c1">### END SOLUTION</span>
 </pre></div>
 
@@ -13183,9 +13191,10 @@ def example(a):
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">exercise_1</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span> <span class="ow">or</span> <span class="n">exercise_1</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
-<span class="k">assert</span> <span class="n">exercise_1</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="k">assert</span> <span class="n">exercise_1</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="o">-</span><span class="mi">10000</span><span class="p">])</span> <span class="o">==</span> <span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">1000</span><span class="p">]</span> <span class="ow">or</span> <span class="n">exercise_1</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="o">-</span><span class="mi">10000</span><span class="p">])</span> <span class="o">==</span> <span class="p">[</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">return_val</span> <span class="o">=</span> <span class="n">exercise_1</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">])</span>
+<span class="k">assert</span> <span class="n">return_val</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span>
+<span class="k">assert</span> <span class="n">return_val</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="k">assert</span> <span class="n">return_val</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
 </pre></div>
 
     </div>
@@ -13205,19 +13214,24 @@ def example(a):
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">exercise_2</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">exercise_2</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Assume `my_list` is a list of strings.</span>
-<span class="sd">    Return an int</span>
-<span class="sd">    Goal: Return the number of strings in `my_list` the begin with the character &#39;T&#39;</span>
+<span class="sd">    Assume val is a numeric or string</span>
+<span class="sd">    Return a bool</span>
+<span class="sd">    Goal: Test if val is a member of my_dictionary (defined below)</span>
+<span class="sd">          Return True is so, False if not</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
+    <span class="n">my_dictionary</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+        <span class="s1">&#39;hello&#39;</span><span class="p">:</span> <span class="s1">&#39;world&#39;</span><span class="p">,</span>
+        <span class="mi">6</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+        <span class="s1">&#39;Case&#39;</span><span class="p">:</span> <span class="s1">&#39;Western Reserve&#39;</span>
+    <span class="p">}</span>
     <span class="c1">### BEGIN SOLUTION</span>
-    <span class="n">Ts</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">my_list</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;T&#39;</span><span class="p">:</span>
-            <span class="n">Ts</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">Ts</span>
+    <span class="k">if</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">my_dictionary</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
     <span class="c1">### END SOLUTION</span>
 </pre></div>
 
@@ -13231,9 +13245,8 @@ def example(a):
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">exercise_2</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span>
-<span class="k">assert</span> <span class="n">exercise_2</span><span class="p">([</span><span class="s1">&#39;Totally&#39;</span><span class="p">,</span> <span class="s1">&#39;Dude&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span>
-<span class="k">assert</span> <span class="n">exercise_2</span><span class="p">([</span><span class="s1">&#39;Toronto&#39;</span><span class="p">,</span> <span class="s1">&#39;Torino&#39;</span><span class="p">,</span> <span class="s1">&#39;Toledo&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">3</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">exercise_2</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span>
+<span class="k">assert</span> <span class="n">exercise_2</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span>
 </pre></div>
 
     </div>
@@ -13253,19 +13266,14 @@ def example(a):
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">exercise_3</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">exercise_3</span><span class="p">(</span><span class="n">my_dictionary</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Assume `my_list` is a list of lists, the sublists are all lists of ints</span>
-<span class="sd">    Return a list</span>
-<span class="sd">    Goal: &quot;flatten&quot; `my_list` from a list of lists in to a SORTED</span>
-<span class="sd">          list containing all of the elements of the sublists</span>
+<span class="sd">    Assume `my_dictionary` is a dictionary with all numeric values</span>
+<span class="sd">    Return a numeric</span>
+<span class="sd">    Goal: Return the sum of all the values in &#39;my_dictionary&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">### BEGIN SOLUTION</span>
-    <span class="n">return_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">my_list</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
-            <span class="n">return_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">return_list</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">my_dictionary</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
     <span class="c1">### END SOLUTION</span>
 </pre></div>
 
@@ -13279,9 +13287,8 @@ def example(a):
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">exercise_3</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
-<span class="k">assert</span> <span class="n">exercise_3</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="k">assert</span> <span class="n">exercise_3</span><span class="p">([[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">exercise_3</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">})</span> <span class="o">==</span> <span class="mi">6</span>
+<span class="k">assert</span> <span class="n">exercise_3</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">})</span> <span class="o">==</span> <span class="mi">0</span>
 </pre></div>
 
     </div>
@@ -13301,15 +13308,24 @@ def example(a):
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">exercise_4</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">exercise_4</span><span class="p">(</span><span class="n">my_dictionary</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Assume `my_list` list of strings</span>
-<span class="sd">    Return a list</span>
-<span class="sd">    Goal: Return a list of the unique values in `my_list`; in other words return</span>
-<span class="sd">          a list with the values of `my_list` without duplicates</span>
+<span class="sd">    Assume `my_dictionary` is a dictionary</span>
+<span class="sd">    Return a dictionary</span>
+<span class="sd">    Goal: Combine `my_dictionary` with the dictionary defined below</span>
+<span class="sd">          into a single dictionary. If there is a collision in keys </span>
+<span class="sd">          use the, key-value pair in `my_dictionary`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">given_dictionary</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+        <span class="s1">&#39;hello&#39;</span><span class="p">:</span> <span class="s1">&#39;world&#39;</span><span class="p">,</span>
+        <span class="mi">6</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+        <span class="s1">&#39;Case&#39;</span><span class="p">:</span> <span class="s1">&#39;Western Reserve&#39;</span>
+    <span class="p">}</span>
     <span class="c1">### BEGIN SOLUTION</span>
-    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">my_list</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">my_dictionary</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">given_dictionary</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="k">return</span> <span class="n">given_dictionary</span>
     <span class="c1">### END SOLUTION</span>
 </pre></div>
 
@@ -13323,11 +13339,12 @@ def example(a):
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">return_val</span> <span class="o">=</span> <span class="n">exercise_4</span><span class="p">([</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">])</span>
-<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">return_val</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">item</span> <span class="ow">in</span> <span class="n">return_val</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">])</span>
-
-<span class="n">return_val</span> <span class="o">=</span> <span class="n">exercise_4</span><span class="p">([</span><span class="s1">&#39;Trump&#39;</span><span class="p">,</span> <span class="s1">&#39;Obama&#39;</span><span class="p">,</span> <span class="s1">&#39;Bush&#39;</span><span class="p">,</span> <span class="s1">&#39;Clinton&#39;</span><span class="p">,</span> <span class="s1">&#39;Bush&#39;</span><span class="p">])</span>
-<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">return_val</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">item</span> <span class="ow">in</span> <span class="n">return_val</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Clinton&#39;</span><span class="p">,</span> <span class="s1">&#39;Trump&#39;</span><span class="p">,</span> <span class="s1">&#39;Obama&#39;</span><span class="p">,</span> <span class="s1">&#39;Bush&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">return_val</span> <span class="o">=</span> <span class="n">exercise_4</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">:</span> <span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="s1">&#39;my_list&#39;</span><span class="p">:</span> <span class="p">[]})</span>
+<span class="k">assert</span> <span class="n">return_val</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span>
+<span class="k">assert</span> <span class="n">return_val</span><span class="p">[</span><span class="s1">&#39;hello&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;world&#39;</span>
+<span class="k">assert</span> <span class="n">return_val</span><span class="p">[</span><span class="s1">&#39;world&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;hello&#39;</span>
+<span class="k">assert</span> <span class="n">return_val</span><span class="p">[</span><span class="s1">&#39;my_list&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="p">[]</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">return_val</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="mi">6</span>
 </pre></div>
 
     </div>
@@ -13347,18 +13364,25 @@ def example(a):
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">exercise_5</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">exercise_5</span><span class="p">(</span><span class="n">my_dictionary</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Assume `my_list` is a list with an even number of elements</span>
-<span class="sd">    Return a list</span>
-<span class="sd">    Goal: Add the string &#39;Hi!&#39; as the middle element of my_list</span>
-<span class="sd">    </span>
-<span class="sd">    Hint: If my_list is given with 4 elements return value should have 5 with &#39;Hi!&#39; between</span>
-<span class="sd">          the first 2 elements of my_list and the last 2 elements of my_list</span>
+<span class="sd">    Assume `my_dictionary` is a dictionary with all numeric values</span>
+<span class="sd">            and all string keys</span>
+<span class="sd">    Return a string</span>
+<span class="sd">    Goal: Return the key that has the greatest value</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">### BEGIN SOLUTION</span>
-    <span class="n">my_list</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Hi!&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">my_list</span>
+    <span class="n">max_value</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">max_key</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">my_dictionary</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">max_value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">max_key</span> <span class="o">=</span> <span class="n">k</span>
+            <span class="n">max_value</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">max_value</span> <span class="o">&lt;</span> <span class="n">v</span><span class="p">:</span>
+                <span class="n">max_key</span> <span class="o">=</span> <span class="n">k</span>
+                <span class="n">max_value</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="k">return</span> <span class="n">max_key</span>
     <span class="c1">### END SOLUTION</span>
 </pre></div>
 
@@ -13372,9 +13396,8 @@ def example(a):
 <div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">exercise_5</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Hi!&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
-<span class="k">assert</span> <span class="n">exercise_5</span><span class="p">([[],</span> <span class="p">[]])</span> <span class="o">==</span> <span class="p">[[],</span> <span class="s1">&#39;Hi!&#39;</span><span class="p">,</span> <span class="p">[]]</span>
-<span class="k">assert</span> <span class="n">exercise_5</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abcdef&#39;</span><span class="p">))</span> <span class="o">==</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;Hi!&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">exercise_5</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">})</span> <span class="o">==</span> <span class="s1">&#39;c&#39;</span>
+<span class="k">assert</span> <span class="n">exercise_5</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1000</span><span class="p">})</span> <span class="o">==</span> <span class="s1">&#39;a&#39;</span>
 </pre></div>
 
     </div>
@@ -13396,13 +13419,14 @@ def example(a):
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">exercise_6</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Assume `my_list` is a list strings, bools, or numerics</span>
-<span class="sd">    Retrun a bool</span>
-<span class="sd">    Goal: If the first and last element of my_list are the same return True otherwise return False</span>
+<span class="sd">    Assume `my_list` is a list of 2 lists, both of the same length</span>
+<span class="sd">    Return a dictionary</span>
+<span class="sd">    Goal: Return a dictionary that is keyed by the elements in the first</span>
+<span class="sd">          list and the values are the associated elements in the second list</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="c1">### BEGIN SOLUTION</span>
-    <span class="k">return</span> <span class="n">my_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">my_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">my_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">my_list</span><span class="p">[</span><span class="mi">1</span><span class="p">])}</span>
     <span class="c1">### END SOLUTION</span>
 </pre></div>
 
@@ -13416,67 +13440,18 @@ def example(a):
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">exercise_6</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="kc">True</span>
-<span class="k">assert</span> <span class="n">exercise_6</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="kc">False</span>
-<span class="k">assert</span> <span class="n">exercise_6</span><span class="p">([</span><span class="s1">&#39;-1&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="kc">True</span>
-</pre></div>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">return_val</span> <span class="o">=</span> <span class="n">exercise_6</span><span class="p">([[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="k">assert</span> <span class="n">return_val</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="k">assert</span> <span class="n">return_val</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span>
+<span class="k">assert</span> <span class="n">return_val</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">return_val</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="mi">3</span>
 
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Exercise-7">Exercise 7<a class="anchor-link" href="#Exercise-7">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">exercise_7</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Assume `my_list` is a list of numerics</span>
-<span class="sd">    Retrun an list of 2 ints</span>
-<span class="sd">    Goal: Return The index of the 2 largest elements in the list</span>
-<span class="sd">    </span>
-<span class="sd">    Do not use numpy! It will be graded as incorrect</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="c1">### BEGIN SOLUTION</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">((</span><span class="n">e</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">my_list</span><span class="p">))[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]]</span>
-    <span class="c1">### END SOLUTION</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">exercise_7</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span> <span class="ow">or</span> <span class="n">exercise_7</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-<span class="k">assert</span> <span class="n">exercise_7</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="o">-</span><span class="mi">10000</span><span class="p">])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="n">exercise_7</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="o">-</span><span class="mi">10000</span><span class="p">])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<span class="n">return_val</span> <span class="o">=</span> <span class="n">exercise_6</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">]])</span>
+<span class="k">assert</span> <span class="n">return_val</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;a&#39;</span>
+<span class="k">assert</span> <span class="n">return_val</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;b&#39;</span>
+<span class="k">assert</span> <span class="n">return_val</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;c&#39;</span>
+<span class="k">assert</span> <span class="n">return_val</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;d&#39;</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">return_val</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="mi">4</span>
 </pre></div>
 
     </div>
