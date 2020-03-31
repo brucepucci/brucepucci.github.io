@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>functions</title>
+		<title>strings</title>
 		<style>
 			@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
 @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
@@ -21,1093 +21,304 @@ h1, h2, h3 {
 		<textarea id="source">
 class: middle, center
 
-# Functions
+# Strings
 
-![](https://magoosh.com/math/files/2018/10/shutterstock_754217827-300x300.jpg)
-
----
-class: middle
-
-# Let's first think about what a function is in math...
-
-A *function* is a relation between sets that associates to every element of a first set exactly one element of the second set.
-
-In other words, a function takes some input and deterministically returns some form of output.
+![](https://lerner.co.il/wp-content/uploads/2018/07/string_shutterstock.jpg)
 
 ---
 class: middle
 
-# An example of a function you might see in some early algebra class is...
+# We already know quite a bit about the str data type.
 
-`f(x) = x - 2`
-
-x: input
-
-f(x): output
-
-x - 2: operation
-
-f: function name
+* Sequence of characters
+* Start and end with either " or '
+* Multi-line string start and end with either """ or '''
+* [Special characters](https://brucepucci.github.io/images/escape_characters.png) are escaped with a forward slash (\\)
+* Iterable
+    * Slice-able
+    * Index-able
+    * For loop-able
+    * len()-able
+* `+` and `*` operator work
 
 ---
 class: middle
 
-# Functions in Python operate is almost exactly the same way.
+# Exercises
 
-A function is a set of statements that take inputs, do some specific computation and produces a predictable output.
-
-We've seen functions in all of our homework thus far, we just didn't go too far in-depth about how they are created or used.
-
----
-
-# Syntax
-
-1. The `def` keyword
-
-
-```python
-*def
-```
-
-`def` is a keyword in python that **defines** a function. The following word will be the name that the function is defined and referenced by.
+* Convert the integer 42 to a string
+* Use an escape character to put a single quote in a sting
+* Use an index the last character in the string "CWRU" in 2 different ways
+* Slide the string "Case Western Reserve University" to just return "Case"
+* Put the strings "Case", "Western", "Reserve", "University" together to read "Case Western Reserve University"
 
 ---
+class: middle
 
-# Syntax
+# Character Encodings
 
-1. The `def` keyword
-2. A function name
-
-
-```python
-*def f
-```
-
-Function names must be a single word and must start with either a letter or underscore.
+A **character encoding** is a set of rules to represent a set of characters on a computer. It's how a computer turns bytes (1s and 0s) into an agreed upon set of symbols (letters, numbers, emojii, etc).
 
 ---
+class: middle
 
-# Syntax
+# Character Encodings
 
-1. The `def` keyword
-2. A function name
-3. Parenthesis
+2 encodings we should know at this point...
 
+* ASCII - Small set of characters (128) that will work on any operating system in any programming language, antiquated but reliable
 
-```python
-*def f()
-```
+* UTF-8 - Has the ability to support millions of characters; think emojii, greek letters, Chinese characters, etc. Python supports UTF-8 by default. It's the de-facto agreed upon modern standard.
 
----
-
-# Syntax
-
-1. The `def` keyword
-2. A function name
-3. Parenthesis
-4. Parameters (More on this later)
-
-```python
-*def f(x)
-```
-
-Parameters are actually optional, you can have a function with no inputs. For example...
-
-```python
-def give_me_1():
-    return 5
-```
+The UTF-8 character set is what defined valid characters in Python 3 meaning you can use any of those characters in your strings.
 
 ---
+class: middle
 
-# Syntax
+# Format Strings
 
-1. The `def` keyword
-2. A function name
-3. Parenthesis
-4. Parameters (More on this later)
-5. A colon
+Format strings are new to Python and are super handy. If you precede any string with the character `f` you can use Python code to fill-in in string **placeholders**. You put the Python piece of the string inside of curly brackets, `{}`. It maintains the same scope that the string is created in.
 
 ```python
-*def f(x):
+*'This is a regular string'
 ```
 
----
-
-# Syntax
-
-1. The `def` keyword
-2. A function name
-3. Parenthesis
-4. Parameters (More on this later)
-5. A colon
-6. A code block
-
-```python
-def f(x):
-*    x = x - 2
 ```
-
----
-
-# Syntax
-
-1. The `def` keyword
-2. A function name
-3. Parenthesis
-4. Parameters (More on this later)
-5. A colon
-6. A code block
-7. A return statement
-
-```python
-def f(x):
-    x = x - 2
-*    return x
-```
-
-The return statement is optional. `None` will be returned if no return statement is executed by the end of the code block. The function immediately stops executing once a return statement is hit and it "returns" the value that the expression to it's right evaluates to. This means that if there is code after a return statement and the return statement runs the code that follows will never run.
-
----
-
-# Syntax
-
-```python
-def f(x):
-    x = x - 2
-    return x
-```
-
-This is called a function **definition**. The code inside of the function is not actually run, the function is just registered with the Python interpreter for use later.
-
----
-
-# Syntax
-
-```python
-def f(x):
-    x = x - 2
-    return x
-```
-
-To use the function we must **call** the function by referencing its name and following it with parenthesis and its expected arguments.
-
-```
-*f(2)
+'This is a regular string'
 ```
 
 ---
 class: middle
 
-# Why use functions?
+# Format Strings
 
-* **Modularity** - Write once - Use anywhere
-* **Maintainability** - A single source of logic for some group of logic
-* **Testability** - Confidence that a function works over-and-over again
-* **Encapsulation** - Wrap related logic up a easily digestible pieces
+Format strings are new to Python and are super handy. If you precede any string with the character `f` you can use Python code to fill-in in string **placeholders**. You put the Python piece of the string inside of curly brackets, `{}`. It maintains the same scope that the string is created in.
+
+```python
+*adjective = 'old'
+*'This is the %s way of formatting' % (adjective)
+```
+
+```
+'This is the old way of formatting'
+```
 
 ---
 class: middle
 
-# Modularity
+# Format Strings
 
-Modularity refers to how well a piece of a system can be removed or re-used elsewhere. If we have a function that reliably does something why should we write the same thing elsewhere?
-
-### Example
-
-Let's say we have the function defined below. We can easily copy and paste it or *import* it in another file and spend essentially no time writing it again AND be assured that it works as it did before.
+Format strings are new to Python and are super handy. If you precede any string with the character `f` you can use Python code to fill-in in string **placeholders**. You put the Python piece of the string inside of curly brackets, `{}`. It maintains the same scope that the string is created in.
 
 ```python
-def absolute_value(num):
-	if num >= 0:
-		return num
-	else:
-		return -num
-
-
-absolute_value(-4)
+*adjective = 'new'
+*f'This is the {adjective} way of formatting'
 ```
----
 
-# Maintainability
-
-Functions make your code more maintainable because your coding logic will have a single source of reference.
-
-### Example
-
-```python
-def capitalize(word):
-    word = word[0].upper() + word[1:]   # sinlge source of failure
-
-capitalize('stay')
-capitalize('healthy')
-capitalize('world')
 ```
-vs.
-
-```python
-'stay'[0].upper() + 'stay'[1:]          # 3 sources
-'healthy'[0].upper() + 'healthy'[1:]    # of
-'world'[0].upper() + 'world'[1:]        # failure
+'This is the new way of formatting'
 ```
 
 ---
+class: middle
 
-# Testability
+# Format Strings
 
-Software tests are a way to gain confidence that a block of code works as expected
-
-### Example
+Format strings are new to Python and are super handy. If you precede any string with the character `f` you can use Python code to fill-in in string **placeholders**. You put the Python piece of the string inside of curly brackets, `{}`. It maintains the same scope that the string is created in.
 
 ```python
-def capitalize(word):
-    word = word[0].upper() + word[1:]   # sinlge source of failure
-
-assert capitalize('hello') == 'Hell0'
+*my_list = [1, 12, 10, -2]
+*f'The min of the list above is {min(my_list)}'
 ```
-If this were not a function it wouldn't be testable.
 
----
-
-# Encapsulation
-
-Encapsulation refers to the action of enclosing some logic in or as if in a capsule. This is sort of in support to the prior 3 concepts in that if we properly encapsulate our logic it will be more modular, more testable and easier to maintain.
-
-### Example
-
-```python
-*def square_list(nums):          # square all the numbers in our list
-*    result = list()
-*    for item in nums:
-*        result.append(item ** 2)
-*    return result
+```
+'The min of the list above is -2'
 ```
 
 ---
+class: middle
 
-# Encapsulation
+# Substring Inclusion
 
-Encapsulation refers to the action of enclosing some logic in or as if in a capsule. This is sort of in support to the prior 3 concepts in that if we properly encapsulate our logic it will be more modular, more testable and easier to maintain.
-
-### Example
+A substring is a slice of a larger string. For example, "My friend Jimmy" would be a substring of "My friend Jimmy Fallon." You can test for substring inclusion with the `in` keyword, just like you would test for inclusion with other iterables.
 
 ```python
-def square_list(nums):
-    result = list()
-    for item in nums:
-        result.append(item ** 2)
-    return result
-
-*my_list = [1, 2, 3, 4]          # test our function
-*square_list(my_list)
+print('App' in 'Apple')
+print('app' in 'Apple')
 ```
 
 ```
-[1, 4, 9, 16]
+True
+False
 ```
 
 ---
+class: middle
 
-# Encapsulation
+# String Methods
 
-Encapsulation refers to the action of enclosing some logic in or as if in a capsule. This is sort of in support to the prior 3 concepts in that if we properly encapsulate our logic it will be more modular, more testable and easier to maintain.
+Back when we looked at lists and dictionaries we learned about methods. Methods are kind of like functions but they belong to a specific class, or data type. You use the object itself to access it's methods through the "dot operator".
 
-### Example
+There are quite a few string methods. We are going to cover a few of them but you can find them all [here](https://docs.python.org/2.5/lib/string-methods.html).
 
-```python
-def square_list(nums):
-    result = list()
-    for item in nums:
-        result.append(item ** 2)
-    return result
+All string methods return a value and do not change the underlying string because strings are **immutable**. This is as opposed to some string and dictionary methods who's methods mutated the object you were working on.
 
-*def sum_of_squares(nums):          # sum all of the squares in our list
-*    return sum(square_list(nums))  # use square_list to make this easy
-```
 ---
+class: middle
 
-# Encapsulation
+# Substring Find
 
-Encapsulation refers to the action of enclosing some logic in or as if in a capsule. This is sort of in support to the prior 3 concepts in that if we properly encapsulate our logic it will be more modular, more testable and easier to maintain.
-
-### Example
+To find the location of a substring you can use the `find` method. It returns the index of the first character of the first occurance of your desired substring.
 
 ```python
-def square_list(nums):
-    result = list()
-    for item in nums:
-        result.append(item ** 2)
-    return result
-
-def sum_of_squares(nums):
-    return sum(square_list(nums))
-
-*my_list = [1, 2, 3, 4]
-*sum_of_squares(my_list)    # test our new function
+my_string = 'I ran 0.2 miles last week.'
+my_substring = '0.2'
+*my_string.find(my_substring)
 ```
 
 ```
-30
+6
 ```
 
 ---
+class: middle
 
-# Function Composition
+# Starts With & Ends With Methods
 
-The previous example of combining functions is called "function composition". I'm sure you've seen something like this before in algebra class. As a refresher it looked something like this for `f(g(x))`...
-
-![](https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSyV1AdlLfRV4CGSVAgSf17ewUCqr5bOQwkO1xfuW1CklgQq4qF)
-
----
-
-# Function Composition
-
-Let's code out a more specific example. The algebra for what we wanna code looks something like this...
-
-![](https://mathbitsnotebook.com/Algebra2/Functions/gans5G.gif)
-
-Let's just make 2 function `f` and `g` and then compose them so we get a proper answer.
-
----
-
-# Function Composition
-
-![](https://mathbitsnotebook.com/Algebra2/Functions/gans5G.gif)
+* `str.startswith(substr)` - `True` if str begins with substr
+* `str.endswith(substr)` - `True` if str ends with substr
 
 ```python
-*def f(x):
-*    return 1 / (x+3)
+substr = 'all.'
+my_string = 'I don\'t know anything at all.'
+
+my_string.startswith(substr)
+my_string.endswith(substr)
 ```
-
----
-
-# Function Composition
-
-![](https://mathbitsnotebook.com/Algebra2/Functions/gans5G.gif)
-
-```python
-def f(x):
-    return 1 / (x+3)
-
-*def g(x):
-*    return x / (x - 2)
 ```
-
----
-
-# Function Composition
-
-![](https://mathbitsnotebook.com/Algebra2/Functions/gans5G.gif)
-
-```python
-def f(x):
-    return 1 / (x + 3)
-
-def g(x):
-    return x / (x - 2)
-```
-
-```python
-f(g(2))
-```
-
-```python
-0.23529411764705882
-```
-
----
-
-# Function Composition
-
-![](https://mathbitsnotebook.com/Algebra2/Functions/gans5G.gif)
-
-```python
-def f(x):
-    return 1 / (x + 3)
-
-def g(x):
-    return x / (x - 2)
-
-*def reduced_fg(x):      # test against algebraic reduction
-*    return (x - 2) / (2 * (2 * x - 3))
-```
-
----
-
-# Function Composition
-
-![](https://mathbitsnotebook.com/Algebra2/Functions/gans5G.gif)
-
-```python
-def f(x):
-    return 1 / (x + 3)
-
-def g(x):
-    return x / (x - 2)
-
-def reduced_fg(x):
-    return (x - 2) / (2 * (2 * x - 3))
-```
-
-```python
-*f(g(10)) == reduced_fg(10)
-```
-
-```python
+False
 True
 ```
 
 ---
 class: middle
 
-# The Call Stack
+# Case Methods
 
-This is pretty important concept and I actually think the book does a pretty good high level job explaining it so I am gonna borrow a lot from there. First something a little conceptual digression.
+* `str.upper()` - Convert the entire string to upper case
+* `str.lower()` - Convert the entire string to lower case
+* `str.title()` - Convert the first letter of every word to upper case
+* `str.capitalize()` - Convert the first letter of the string to upper case
 
----
-class: middle
-
-# The Call Stack
-
-"Imagine that you have a meandering conversation with someone. You talk about your friend Alice, which then reminds you of a story about your coworker Bob, but first you have to explain something about your cousin Carol. You finish you story about Carol and go back to talking about Bob, and when you finish your story about Bob, you go back to talking about Alice. But then you are reminded about your brother David, so you tell a story about him, and then get back to finishing your original story about Alice."
-
-![](https://automatetheboringstuff.com/2e/images/000109.jpg)
-
----
-class: middle
-
-# The Call Stack
-
-This conversation is analogous to how function calls and the "call stack" works in Python. Once we call a function we jump into that function until we either finish it or call another function; similar to either finishing a thought or starting a new though in the conversation example.
-
-Its called a stack because when a new function is called we put it on top of the stack (aka "push"). Once a function finishes we remove it from the stack (aka "pop", we've seen pop before used in a similar concept).
-
----
-class: middle
-
-# The Call Stack
-
-Since we are online let's use an [online stack visualizer](https://www.cs.usfca.edu/~galles/visualization/SimpleStack.html).
-
-
-
----
-class: middle
-
-# The Call Stack
 ```python
-def a():
-    print('a() starts')
-    b()
-    d()
-    print('a() returns')
+'what is wrong with you'.upper()
+```
 
-def b():
-    print('b() starts')
-    c()
-    print('b() returns')
-
-def c():
-    print('c() starts')
-    print('c() returns')
-
-def d():
-    print('d() starts')
-    print('d() returns')
-
-a()
+```
+'WHAT IS WRONG WITH YOU'
 ```
 
 ---
 class: middle
 
-# Scope
+# Is Methods
 
-Scope refers to the portion of source code in which a variables's name can be used. In Python, variables created in functions are known to have **local scope**, meaning they are only accessible within that function. A variable that has local scope is called a **local variable**.
-
-The opposite local scope is **global scope** and a variable that has the property of global scope is called a **global variable**. A global variable is accessible from anywhere in the program.
-
-Variable must have either global or local scope.
-
----
-class: middle
-
-# Scope
-
-Try to think of scope as a container. Once that container is destroyed all of the variables is destroyed all variables inside of it are forgotten. Global scope is created when a program starts running and is destroyed when the program finishes. There is only 1 global scope.
-
-Local scope is created when a function is called and is destroyed when it finishes. The next time you call this function it has no recollection of what happened the last time it ran. A new variable "container" is created every time. There can be an arbitrary amount of local scopes.
-
----
-
-# Scope
-
-Operations inside of a function have access to local and global variables. Operations outside of a function can only access global variables.
-
+* `str.isupper()` - `True` if all characters are upper case
+* `str.islower()` - `True` if all characters are lower case
+* `str.isspace()` - `True` if all characters are whitespace
+* `str.isalpha()` - `True` if all characters are alphabetic
+* `str.isdigit()` - `True` if all characters are integers
 
 ```python
-*x = 0  # create a variable in gloabl scope
+'123342.21312'.isdigit()
+'12334221312'.isdigit()
 ```
-
----
-
-# Scope
-
-Operations inside of a function have access to local and global variables. Operations outside of a function can only access global variables.
-
-```python
-x = 0
-
-def my_func():
-*    y = 1    # create a variable in scope local to my_func
 ```
-
----
-
-# Scope
-
-Operations inside of a function have access to local and global variables. Operations outside of a function can only access global variables.
-
-```python
-x = 0
-
-def my_func():
-    y = 1
-*    print(x)   # We can access global vaibales
-*    print(y)   # and local varibales in a function
-
-my_func()
-```
-
-```
-0
-1
-```
-
----
-
-# Scope
-
-Operations inside of a function have access to local and global variables. Operations outside of a function can only access global variables.
-
-```python
-x = 0
-
-def my_func():
-    y = 1
-
-*print(x)   # We can access global vaibales in global scope
-*print(y)   # But not local ones
-```
-
-```
-0
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-NameError: name 'y' is not defined
+False
+True
 ```
 
 ---
 class: middle
 
-# Scope
+# Whitespace are characters that exist and are printable but have no character representing them.
 
-If we refer back to our call stack example we can see that local scope pertains to all variables created in each item of the stack. When the item on the stack gets destroyed the variables are forgotten.
-
----
-class: middle
-
-# Not only are global variables accessible inside of functions but we can also change their value
-
-Back to our example...
+Examples inclde scapces (' '), tabs ('\t') and new lines ('\n'). Strings with whitespace are NOT empty.
 
 ```python
-x = 0
-
-def my_func():
-    x += 1  # Change the value of x.
-
-*print(x)   # Notice that my_func doesnt do anything
-            # until it is called
-```
-
-```
-0
-```
-
----
-
-# Not only are global variables accessible inside of functions but we can also change their value
-
-```python
-x = 0
-
-def my_func():
-    x += 1  # Change the value of x.
-
-print(x)
-*my_func()  # change the value of x
-*print(x)   # see updated x
-```
-
-```
-0
-1
-```
-
----
-
-# Variables can be created in local scope that have the same name as a variable in global scope.
-
-The globally scoped variable is non-addressable for the rest of the duration of the local scope. The global scope variable will retain it's value after the local scope is terminated.
-
-```python
-x = 0
-
-*def my_func():
-*    x = 1    # create a variable with the same name
-*    print(x) # print the LOCAL vaiable not the global one
-```
----
-
-# Variables can be created in local scope that have the same name as a variable in global scope.
-
-The globally scoped variable is non-addressable for the rest of the duration of the local scope. The global scope variable will retain it's value after the local scope is terminated.
-
-```python
-x = 0
-
-def my_func():
-    x = 1
-    print(x)
-
-*my_func()
-*print(x)
-```
-
-```
-1
-0
-```
-
----
-
-# Variables can be created in local scope that have the same name as a variable in global scope.
-
-The globally scoped variable is non-addressable for the rest of the duration of the local scope. The global scope variable will retain it's value after the local scope is terminated.
-
-```python
-x = 0
-
-def my_func():
-    x = 1
-    print(x)
-
-my_func()
-print(x)
-```
-
-```
-1
-0
-```
-
-**IMPORTANT PIECE HERE... DON'T DO THIS! YOU WILL BREAK SOMETHING!**
-
----
-
-# The `global` keyword
-
-You can essentially "ship" a variable up to global scope from local scope with the global keyword. This is called scope promotion
-
-```python
-
-def my_func():
-    global x
-    x = 1
-
-print(x)   # Won't be there yet because the code hasn't run
-```
-
-```
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-NameError: name 'x' is not defined
-```
-
----
-
-# The `global` keyword
-
-You can essentially "ship" a variable up to global scope from local scope with the global keyword. This is called scope promotion
-
-```python
-
-def my_func():
-    global x
-    x = 1
-
-my_func()
-print(x)
-```
-
-```
-1
-```
-
-
----
-class: middle
-
-# Functions as a "Black Box"
-
-Often times you can think of a function as a **black box**. Meaning that all you need to concern yourself with are thinking about inputs and outputs. What happens in the middle, the code that actually does something, is completely extraneous to you. You expect it to do something you just don't really care *how* it does it. This is why having a strong understanding of the specifics of how information gets in and out is so important.
-
----
-class: middle
-
-# Function Parameters And Arguments
-
-When a function is defined you specify the **parameters** you expect the function to receive. Parameters are variables for use inside of a function. Parameters contain values called **arguments** that are passed when the function is called.
-
-* Parameters -> Specified when defining a function
-* Arguments -> Values stored in parameters when a function is called
-
-```python
-def my_func(x):   # x is a parameter
-    return x + 1
-
-my_func(1)   # 1 is an argument to the
-             # x parameter in the function my_func
+''       # Empty string, eval to False
+'      ' # Non-Empty string, eval to True
 ```
 
 ---
 class: middle
 
-# Defining Function Parameters
+# Strip Methods
 
-Function parameters are defined between the parenthesis in the function definition.
-
-```python
-* def my_func(<PARAMETERS GO HERE>):
-    something = do_something()
-    return something
-```
-
-Arguments to these parameters can either be required or optional...
-* **Required Arguments** - Must be passed when function is called, no default value if not passed
-* **Optional Arguments** - optionally passed when function is called, has a default value if not passed
-
----
-# Argument Default Values
-
-When you define a function and set your parameters you have the option to set a **default value**. This is the value that will be assigned to the parameter if an argument is not passed.
+* `str.rstrip()` - Remove all whitespace from the end of a string
+* `str.lstrip()` - Remove all whitespace from the beginning of a string
+* `str.strip()` - Remove all whitespace from the beginning & end of a string
 
 ```python
-* def hello_world(punct='!'): # Create a parameter named punct that is optional.
-*                             # Defaults to '!' if not passed
-*    return 'Hello, world' + punct
-```
-
----
-# Argument Default Values
-
-When you define a function and set your parameters you have the option to set a **default value**. This is the value that will be assigned to the parameter if an argument is not passed.
-
-```python
- def hello_world(punct='!'): # Create a parameter named punct that is optional.
-                            # Defaults to '!' if not passed
-    return 'Hello, world' + punct
-```
-
-```python
-*hello_world()    # Not passing punct
-```
-
-```python
-'Hello, world!'
-```
----
-# Argument Default Values
-
-When you define a function and set your parameters you have the option to set a **default value**. This is the value that will be assigned to the parameter if an argument is not passed.
-
-```python
- def hello_world(punct='!'): # Create a parameter named punct that is optional.
-                            # Defaults to '!' if not passed
-    return 'Hello, world' + punct
-```
-
-```python
-*hello_world('.')    # punct is '.'
-```
-
-```python
-'Hello, world.'
-```
-
----
-# Argument Default Values
-
-When you define a function and set your parameters you have the option to set a **default value**. This is the value that will be assigned to the parameter if an argument is not passed.
-
-```python
- def hello_world(punct='!'): # Create a parameter named punct that is optional.
-                            # Defaults to '!' if not passed
-    return 'Hello, world' + punct
-```
-
-```python
-*hello_world('?')    # punct is '?'
-```
-
-```python
-'Hello, world?'
-```
-
----
-# Argument Default Values
-
-If no default value is set in your parameter definition it is then required that pass an argument for that param. If there is a default value then an arg for that respective param is not required.
-
-```python
- *def hello_person(name, punct='!'): # name is required
- *                                   # punct is optional
- *   return 'Hello, ' + name + punct
-```
-
----
-# Argument Default Values
-
-If no default value is set in your parameter definition it is then required that pass an argument for that param. If there is a default value then an arg for that respective param is not required.
-
-```python
-def hello_person(name, punct='!'): # name is required
-                                   # punct is optional
-    return 'Hello, ' + name + punct
-```
-
-```python
-*hello_person('Bruce')
+'     Oh, no. I added too much whitespace.'.lstrip()
 ```
 
 ```
-'Hello, Bruce!'
-```
-
----
-# Argument Default Values
-
-If no default value is set in your parameter definition it is then required that pass an argument for that param. If there is a default value then an arg for that respective param is not required.
-
-```python
-def hello_person(name, punct='!'): # name is required
-                                   # punct is optional
-    return 'Hello, ' + name + punct
-```
-
-```python
-*hello_person()
-```
-
-```
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-TypeError: hello_person() missing 1 required positional argument: 'name'
-```
----
-
-# Argument Default Values
-
-If no default value is set in your parameter definition it is then required that pass an argument for that param. If there is a default value then an arg for that respective param is not required.
-
-```python
-def hello_person(name, punct='!'): # name is required
-                                   # punct is optional
-    return 'Hello, ' + name + punct
-```
-
-```python
-*hello_person('Bruce', '.')
-```
-
-```
-'Hello, Bruce.'
+'Oh, no. I added too much whitespace.'
 ```
 
 ---
 class: middle
 
-# Let's take a look at a "real life" function definition...
+# Split and Join Methods
 
-#### From [xgboost](https://xgboost.readthedocs.io/en/latest/python/python_api.html)...
+These are probably to 2 most useful string methods. We use them to interchange lists of strings to a single string and a single string into a list of strings.
+
+### Split
+
+We use the split method on a string and it takes a string as a prameter. It splits the string on each instance of the argument you pass and returns the result as a list. The item that splits the string is called the **delimiter**.
+
 ```python
-fit(X, y, sample_weight=None, base_margin=None, eval_set=None, eval_metric=None, early_stopping_rounds=None, verbose=True, xgb_model=None, sample_weight_eval_set=None, callbacks=None)
+my_students = 'student_a,student_b,student_c,student_d'
+my_students.split(',')
 ```
 
-We have 11 parameters....
-
-What if we want to give an argument to just a few of these and leave the rest as defaults?
-
-What if we want only want to give arguments to the required 2 and `callbacks`?
-
-Do we need to fill out all 11 to get there?
-
----
-class: middle
-
-# Let's take a look at a "real life" function definition...
-
-#### From [xgboost](https://xgboost.readthedocs.io/en/latest/python/python_api.html)...
-```python
-fit(X, y, sample_weight=None, base_margin=None, eval_set=None, eval_metric=None, early_stopping_rounds=None, verbose=True, xgb_model=None, sample_weight_eval_set=None, callbacks=None)
 ```
-
-We have 11 parameters....
-
-What if we want to give an argument to just a few of these and leave the rest as defaults?
-
-What if we want only want to give arguments to the required 2 and `callbacks`?
-
-Do we need to fill out all 11 to get there?
-
-**No.** We use what are called **keyword arguments**.
-
----
-class: middle
-
-# Keyword Vs Positional Arguments
-
-In general, the first argument you give will fulfill the first parameter defined, the second will fulfill the second and so on... This is called using **positional argument (or arg)**, as the position in which you send them matters.
-
-However, if you want to send a specific argument to a specific parameter you can use that arguments "keyword" defined in the function definition. This is called a **keyword argument (or kwarg)**.
-
-```python
-def my_func(a, b, c):
-    return a + b + c
-
-my_func(1, 2, 3)         # calling my_func with positional arguments
-my_func(a=1, b=2, c=3)  # calling my_func with keyword arguments
-my_func(b=1, a=2, c=3)  # if you use kwargs the position does not matter
+['student_a', 'student_b', 'student_c', 'student_d']
 ```
 
 ---
 class: middle
 
-# Keyword Vs Positional Arguments
+# Split and Join Methods
 
-When a  function has default parameters you only have to give the required arguments. You have the option of using the keyword to replace default values in the optional arguments.
+These are probably to 2 most useful string methods. We use them to interchange lists of strings to a single string and a single string into a list of strings.
 
-Going back to our "real world" example...
+### Join
 
-#### From [xgboost](https://xgboost.readthedocs.io/en/latest/python/python_api.html)...
-```python
-fit(X, y, sample_weight=None, base_margin=None, eval_set=None, eval_metric=None, early_stopping_rounds=None, verbose=True, xgb_model=None, sample_weight_eval_set=None, callbacks=None)
-```
+Join is kind of the opposite of split. It takes a list of strings as an argument and puts the string you called the method on between each occurance.
 
 ```python
-fit(my_X, my_y, early_stopping_rounds=50)
+my_students = ['student_a', 'student_b', 'student_c', 'student_d']
+delimiter = ','
+delimiter.join(my_students)
 ```
 
-`X` and `y` were given positionally and the only default I chose to change was `early_stopping_rounds`.
+```
+'student_a,student_b,student_c,student_d'
+```
 
 ---
 class: middle
 
-# Required arguments must come before optional ones in the function definition.
-
-Yes...
-```python
-def my_func(a, b, c=4):
-    return a + b + c
-```
-
-No...
-```python
-def my_func(a, b=4, c):
-    return a + b + c
-```
-
-```python
-  File "<stdin>", line 1
-SyntaxError: non-default argument follows default argument
-```
+# Exercises
 
 ---
-# Exercises!
+class: middle
 
-```python
-def triangle_area(base, height):
-    return base * height * .5
-```
-```python
-triangle_area(10, 20) # What is the return value?
-triangle_area(20, 10) # What is the return value?
-```
----
-# Exercises!
+# Next Class Lead In
 
-```python
-def triangle_area(base, height):
-    return base * height * .5
-```
-```python
-triangle_area(10, 20) # What is the return value?
-triangle_area(20, 10) # What is the return value?
-```
-```python
-triangle_area(10, 20) # What is the base equal to?
-triangle_area(height=20, base=10) # What is base equal to?
-```
-
----
-# Exercises!
-
-```python
-def triangle_area(base, height):
-    return base * height * .5
-
-def scale_area(area, scaler):
-    return area * scaler
-
-def scaled_triangle_area(base, height, scaler=1):
-    area = triangle_area(base, height)
-    scaled_area = scale_area(area, scaler)
-    return scaled_area
-```
-```python
-scaled_triangle_area(10, 10)   # Walk us through the call stack
-scaled_triangle_area(10, 10, scaler=2)   # What changes?
-```
-
----
-# Exercises!
-
-Check out the documentation [here](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html#sklearn.metrics.mean_squared_error)
-
-Call the mean_squared_error function with any made-up name for parameters `y_true`, `y_pred` but set `squared` to False
-
----
-# Exercises!
-
-```python
-"""
-name: add
-arguments:
-    a (numeric),
-    b (numeric),
-    inverse (optional, default = False)
-returns: a + b or a + b * -1 if inverse
-<<<<<<< HEAD
-
-"""
-```
-=======
- 
-"""
-```
->>>>>>> 7ac5ff34caa7886b6f73207a1c0bb845c921598b
-
+There is a much more powerful but much more complicated way of seaching and altering strigs called **regular expressions**. We're spend a small amount of time on very basic **regex** expressions, then get into dealing with files.
 		</textarea>
 		<script>require=(function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require=="function"&&require;if(!s&&o)return o(n,!0);if(r)return r(n,!0);throw new Error("Cannot find module '"+n+"'")}var u=t[n]={exports:{}};e[n][0].call(u.exports,function(t){var r=e[n][1][t];return i(r?r:t)},u,u.exports)}return t[n].exports}var r=typeof require=="function"&&require;for(var s=0;s<n.length;s++)i(n[s]);return i})({"components/printing":[function(require,module,exports){
 module.exports=require('yoGRCZ');
