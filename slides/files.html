@@ -479,6 +479,8 @@ class: middle
 
 # Reading and Writing Example
 
+First let's write a file...
+
 ```python
 *my_poem = open('my_poem.txt', 'w')   # Create/open a file name my_file.txt
 *                                    # Can only be written to
@@ -487,6 +489,8 @@ class: middle
 ---
 
 # Reading and Writing Example
+
+First let's write a file...
 
 ```python
 my_poem = open('my_poem.txt', 'w')
@@ -503,6 +507,8 @@ Was he Bare?"""
 ---
 
 # Reading and Writing Example
+
+First let's write a file...
 
 ```python
 my_poem = open('my_poem.txt', 'w')
@@ -521,6 +527,8 @@ my_poem.write(fuzzy_wuzzy)
 
 # Reading and Writing Example
 
+Now let's read that file...
+
 ```python
 * my_poem = open('my_poem.txt', 'r')   # Now we are going to open my_file for reading
 ```
@@ -528,6 +536,8 @@ my_poem.write(fuzzy_wuzzy)
 ---
 
 # Reading and Writing Example
+
+Now let's read that file...
 
 ```python
 my_poem = open('my_poem.txt', 'r')
@@ -537,6 +547,8 @@ my_poem = open('my_poem.txt', 'r')
 ---
 
 # Reading and Writing Example
+
+Now let's read that file...
 
 ```python
 my_poem = open('my_poem.txt', 'r')
@@ -557,6 +569,8 @@ Was he Bare?
 
 # Reading and Writing Example
 
+Now let's read that file in a slightly different way...
+
 ```python
 my_poem = open('my_poem.txt', 'r')
 *contents = my_poem.readlines()    # readlines() instead
@@ -571,6 +585,8 @@ print(contents)
 ---
 
 # Reading and Writing Example
+
+Appending to a file? 
 
 ```python
 my_poem = open('my_poem.txt', 'w')    # Reopen for writing
@@ -592,29 +608,7 @@ Lalala
 
 # Reading and Writing Example
 
-```python
-my_poem = open('my_poem.txt', 'a')    # If we would have put a 'a' it would have appended to the end instead
-*my_poem.write('Lalala')
-my_poem.close()
-
-my_poem = open('my_poem.txt', 'r')    # Reopen for reading
-contents = my_poem.read()
-my_poem.close()
-
-print(contents)    # We wrote over our old text
-```
-
-```
-Fuzzy Wuzzy Was a Bear
-Fuzzy Wuzzy Had no Hair
-Fuzzy Wuzzy Wasn't Fuzzy 
-Was He?
-Was he Bare?Lalala
-```
-
----
-
-# Reading and Writing Example
+Appending to a file.
 
 ```python
 my_poem = open('my_poem.txt', 'a')    # If we would have put a 'a' it would have appended to the end instead
