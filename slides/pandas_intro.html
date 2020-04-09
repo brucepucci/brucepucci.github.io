@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>files</title>
+		<title>pandas_intro</title>
 		<style>
 			@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
 @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
@@ -21,849 +21,444 @@ h1, h2, h3 {
 		<textarea id="source">
 class: middle, center
 
-# Files
+# Pandas Intro
 
-![](https://blog.laplink.com/wp-content/uploads/2015/07/file-transfer.png)
-
----
-class: middle
-
-# The Python Standard Library
-
-While Python ships with many "built-in" functions it falls well short of what is needed to build something useful. Python maintains this idea of being **batteries included**. So, it ships with a whole lot of code that you can use to make your life easier. They ship in modules called **libraries**, although the terms module and library can be used interchangeably. There are over 200 of them here are some of the more useful ones...
-
-* `os` - Dealing with the operating system
-* `re` - Writing and executing regular expressions
-* `datetime` - Dealing with dates, time, timezones, etc
-* `math` - Math functions
-* `csv` - Reading and writing csv files
-* `json` - Reading and writing json files
+![](https://pandas.pydata.org/static/img/pandas.svg)
 
 ---
 class: middle
 
-# The Python Standard Library vs PIP
+# 3rd Party Python Packages
 
-While there are hundreds of libraries in the Python standard library there are tens of thousands of libraries in the Python package installer, known as PIP. PIP and the standard library differ in the following ways...
+While we do get hundreds of libraries in the Python Standard Library it doesn't give us everything. There are plenty of other, more specific, use cases where Python can help you. For these, more specialized, use cases there are many thousands of packages made by 3rd party developers.
 
-* PIP packages need to be installed by the user, standard library libraries come with Python
-* Standard Library libraries are maintained by the Python Software Foundation and PIP libraries are maintained by 3rd parties
-* Standard Library packages are well tested and well documented on the Python website and PIP package reliability, testing and  documentation is up to the third party developers.
+These packages don't exist when you install Python... You need to make additional installs to have them available for use. For that, `pip` and `PyPI` exist.
 
 ---
 class: middle
 
-# Importing a Python Library
+# `pip` and `PyPI`
 
-Importing a library is dead simple in Python.
+* **pip** is an executable program that ships with Python that handles the download, organization and install of 3rd party Python packages.
 
-```python
-import time            # Bring in the time module
+* **PyPi** stands for the Python Package Index and hosts the packages that PIP can install. As of April 9th, 2020 there are currently 227,092 projects on PyPI.
+
+So... pip runs locally on your computer, reaches out to PyPI to download a package then installs it so you can import and use it later.
+
+---
+class: middle
+
+# Using pip
+
+`pip` is deal simple to use. Once you find a package that you want to install you just run something like this in your systems Terminal application...
+
+```
+pip install numpy
 ```
 
-Each library is simply some Python code that you can use, they can ship with classes, functions, variables, etc for you to use as you wish. Accessing components of these libraries is done with the **dot operator**.
+After the install completes you can import a package just like the standard library like this...
 
-```python
-time.localtime()   # Call the localtime function
 ```
-```
-time.struct_time(tm_year=2020, tm_mon=4, tm_mday=2, tm_hour=14, tm_min=20, tm_sec=56, tm_wday=3, tm_yday=93, tm_isdst=0)
+import numpy
 ```
 
 ---
 class: middle
 
-# Importing a Python Library
+# A note on pip in Google Colab notebooks
 
-If for some reason you only want a piece of a particular library you can use the from syntax.
+All of the packages that we will be using in class are **already installed** there. You will not have to run the `pip install xxx` line above to use these packages. However, if you want to use them locally or in a future project you will need to install them with `pip`.
+
+---
+class: middle
+
+# What types of packages are available on PyPI?
+
+You can pretty much find something for any use case. Some of the most popular packages and their use cases are listed below...
+
+* **pandas** - Manipulating tabular data
+* **numpy** - Numerical computing
+* **flask** - Serving a web site
+* **requests** - Make web requests
+* **pillow** - Image manipulation
+* **matplotlib** - Visualizing data
+* **tensorflow** - Build and train neural networks
+* **arrow** - Better date/time support
+
+---
+class: middle
+
+# Pandas
+
+We are going to be covering **Pandas** pretty in-depth in the next few weeks. For business applications it is probably the best skill to learn at this point.
+
+Pandas is a pacakge used for transforming, summarizing, and reading/writing *tabular data*.
+
+---
+class: middle
+
+# What is tabular data?
+
+We've all seen *tables* of a data before. The most common place you've probably seen it is in Microsoft Excel.
+
+![](https://pandas.pydata.org/docs/_images/01_table_spreadsheet.png)
+
+Tables consist of a series of **columns** and **rows**. Typically, each row represents an individual record and each column is a property of that record.
+
+Tabular data can be found outside of MS Excel obviously. For example...
+
+* 2D matrix in linear algebra
+* SQL tables
+* CSV files
+* HTML tables
+* Images are a numerical matrix of pixels
+* Videos are a series of images
+* Etc...
+
+---
+class: middle
+# A third element... The row index
+
+Columns and rows should be pretty intuitive but a 3rd element comes into play called an *index*. An index is simple a reference to a specific row. Each row much have a unique index. Row number is a perfectly good index but you could use something more descriptive in certain situations. An example might be something like order # in an application for a restaurant receipts.
+
+Columns have an equivalent, the column name. Just think of the index as a "row name"
+
+---
+class: middle
+
+# A list of data in Pandas is called a **Series**
+
+Every series has an index. Usually that index is just like a standard Python list index... integers from 0 to the length of the list - 1. However, as discussed in previous slide it can be whatever you want as long as it is unique to each record.
+
+All items in a series must be of the same datatype. For example, a series of `int` cannot contain a `float`.
+
+---
+class: middle
+
+# Comparing pandas series vs Python list
+
+| Pandas Series                          | Python List                            |
+|----------------------------------------|----------------------------------------|
+| Elements must be same data type        | Elements can be mixed data types       |
+| Customizable index                     | Always indexed from 0..len()-1         |
+| Extremely fast for numerical operation | Extremely slow for numerical operation |
+| Many of handy numerical methods        | Very few numerical methods             |
+| Great for tabular data                 | Great for general purpose programming  |
+
+---
+# Creating a Pandas Series
 
 ```python
-from time import localtime            # Bring in just the localtime function
+*import pandas as pd  # import pandas and alias it to pd
 ```
 
-You no longer need the dot operator to get into the time module. In fact, the time module isn't even addressable using this for of importing.
-
-```python
-localtime()   # Call the localtime function
-```
-```
-time.struct_time(tm_year=2020, tm_mon=4, tm_mday=2, tm_hour=14, tm_min=20, tm_sec=56, tm_wday=3, tm_yday=93, tm_isdst=0)
-```
+---
+# Creating a Pandas Series
 
 ```python
-time.localtime()
+import pandas as pd
+
+*my_series = pd.Series([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) # Wrap a list with pd.Series()
 ```
+
+---
+# Creating a Pandas Series
+
+```python
+import pandas as pd
+
+my_series = pd.Series([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+*print(my_series)
 ```
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-NameError: name 'time' is not defined
+
+```
+0    0
+1    1
+2    2
+3    3
+4    4
+5    5
+6    6
+7    7
+8    8
+9    9
+dtype: int64
+```
+
+---
+# Creating a Pandas Series
+
+```python
+import pandas as pd
+
+my_series = pd.Series([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+*print(my_series[0])   # Look up by index
+```
+
+```
+0
+```
+
+---
+# Creating a Pandas Series
+
+```python
+import pandas as pd
+
+my_series = pd.Series([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+*my_series.index = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+
+print(my_series)
+```
+
+```
+a    0
+b    1
+c    2
+d    3
+e    4
+f    5
+g    6
+h    7
+i    8
+j    9
+dtype: int64
+```
+
+---
+# Creating a Pandas Series
+
+```python
+import pandas as pd
+
+my_series = pd.Series([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+my_series.index = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+
+*print(my_series['b'])  ## lookup by index
+```
+
+```
+1
+```
+
+---
+# Doing something with a Pandas Series
+
+There are a ton of methods you can call on a series. Most are math/stats based.
+
+```python
+import pandas as pd
+
+my_series = pd.Series([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+*print(my_series.max())  ## return the max value
+```
+
+```
+9
+```
+
+---
+# Doing something with a Pandas Series
+
+There are a ton of methods you can call on a series. Most are math/stats based.
+
+```python
+import pandas as pd
+
+my_series = pd.Series([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+*print(my_series.mean())  ## return the mean value
+```
+
+```
+4.5
+```
+
+---
+# Doing something with a Pandas Series
+
+There are a ton of methods you can call on a series. Most are math/stats based.
+
+```python
+import pandas as pd
+
+my_series = pd.Series([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+*print(my_series.describe())  ## summarize our data
+```
+
+```
+count    10.00000
+mean      4.50000
+std       3.02765
+min       0.00000
+25%       2.25000
+50%       4.50000
+75%       6.75000
+max       9.00000
+dtype: float64
+```
+
+---
+# Doing something with a Pandas Series
+
+There are a ton of methods you can call on a series. Most are math/stats based.
+
+```python
+import pandas as pd
+
+my_series = pd.Series([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+description = my_series.describe()   # Desciption is a Series with index on previous slide
+print(description['count'])   # Use it like a Series
+```
+
+```
+count    10.0
 ```
 
 ---
 class: middle
 
-# Importing a Python Library
+# Mathematical Operations in Pandas are "element wise"
 
-If you want multiple pieces of a library use commas to separate the pieces you want.
+When performing a mathematical operation on 2 Pandas Series' we do so **element wise**. Meaning we add the 1st element from Series a to the 1st element of Series b then the 2nd element from Series a to the 2nd element of series b... and so on. This results in a series of the same length being returned.
+
+---
+class: middle
+
+# "Element Wise" operations in action
 
 ```python
-from time import localtime, time_ns           # Bring in a couple functions
-```
+import pandas as pd
 
-You no longer need the dot operator to get into the time module. In fact, the time module isn't even addressable using this for of importing.
-
-```python
-localtime()   # Call the localtime function
-time_ns()   # Call the time_ns function
+*a = pd.Series(range(10))         # [0 1 2 3 4 5 6 7 8 9]
+*b = pd.Series(range(0, 100, 10)) # [ 0 10 20 30 40 50 60 70 80 90]
 ```
 
 ---
 class: middle
 
-# The `os` module
-
-The `os` module provides an interface to operating system functions. We can...
-
-* List all the files in a directory
-* Deleting a file
-* Create a file
-* Search for and terminate running processes
-* etc.
-
-It pretty much mimics the things you can do in Finder in Mac or Explorer in Windows.
-
----
-class: middle
-
-# File Paths
-
-A **pathname** (or path) is a string of characters that gets you to a specific directory or file in your file system. For example, the pathname of the Desktop on Mac is `/Users/brucepucci/Desktop`.
-
-Directories (or folders) in a file path are separated by a slash (/). Every item on your filesystem has an addressable path.
-
-If you had a file on your desktop named `my_file.py`, it's pathname is `/Users/brucepucci/Desktop/my_file.py`.
-
----
-class: middle
-
-# Absolute vs. Relative Paths
-
-A path like `/Users/brucepucci/Desktop` is an **absolute path** because it give you the entirety of the path from the root (`/`) of the file system to where the actual subject is located. An absolute path always refers to the same place no matter where in the system you reference it from.
-
-A **relative path** references a location relative to the place where you currently are in the file system. Relative paths do not start at the root of the filesystem, they start from where you currently are.
-
----
-class: middle
-
-# Absolute vs. Relative Paths
-
-For example, if I am running a command from `/Users/brucepucci` and want to access a file at `/Users/brucepucci/Desktop/my_file.py`...
-
- * Relative path: `Desktop/my_file.py`
- * Absolute path: `/Users/brucepucci/Desktop/my_file.py`
-
-Any valid path that does not begin with a slash is a relative path.
-
----
-class: middle
-
-# Some relative path syntax
-
-A single dot (.) at the beginning of a path references the path that you are currently in.
-
-2 dots (..) at the beginning of a references the ***parent path***, aka 1 path up from here.
-
-`./my_file.py` : Relative path to my_file.py from the path we are currently operating in
-
-`../my_file.py` : Relative path to my_file.py one directory up from the path we are currently operating in
-
----
-class: middle
-
-# One more slide on relative vs absolute paths....
-
-![](https://automatetheboringstuff.com/2e/images/000057.jpg)
-
----
-class: middle
-
-# Exercises
-
-```
-*├── my_project                      <-----
-│   ├── folder_a
-│   │   ├── file_1.txt
-│   │   ├── file_2.txt
-│   │   ├── file_3.txt
-│   │   ├── file_4.txt
-│   │   └── folder_a1
-│   │      └── my_secret.key
-│   ├── folder_b
-│   │   ├── data.csv
-│   │   └── data.json
-│   ├── folder_c
-│   └── my_code.py
-```
-
-Say we are in the folder denoted by the arrow. Give a relative path to `my_code.py`
-
----
-class: middle
-
-# Exercises
-
-```
-├── my_project
-│   ├── folder_a
-│   │   ├── file_1.txt
-│   │   ├── file_2.txt
-│   │   ├── file_3.txt
-│   │   ├── file_4.txt
-*│   │   └── folder_a1                      <-----
-│   │      └── my_secret.key
-│   ├── folder_b
-│   │   ├── data.csv
-│   │   └── data.json
-│   ├── folder_c
-│   └── my_code.py
-```
-
-Say we are in the folder denoted by the arrow. Give a relative path to `my_code.py`
-
----
-class: middle
-
-# Exercises
-
-```
-*├── my_project                      <-----
-│   ├── folder_a
-│   │   ├── file_1.txt
-│   │   ├── file_2.txt
-│   │   ├── file_3.txt
-│   │   ├── file_4.txt
-│   │   └── folder_a1
-│   │      └── my_secret.key
-│   ├── folder_b
-│   │   ├── data.csv
-│   │   └── data.json
-│   ├── folder_c
-│   └── my_code.py
-```
-
-Say we are in the folder denoted by the arrow. Give a relative path to `data.json`
-
----
-class: middle
-
-# Basic use of the `os` module
-
-Let's use some of the basic functionality in the `os` module to poke around our file system.
-
-I am going to create a directory called `my_project` in my Documents folder that looks like this...
-
-```
-├── my_project
-│   ├── folder_a
-│   │   ├── file_1.txt
-│   │   ├── file_2.txt
-│   │   ├── file_3.txt
-│   │   ├── file_4.txt
-│   │   └── folder_a1
-│   │      └── my_secret.key
-│   ├── folder_b
-│   │   ├── data.csv
-│   │   └── data.json
-│   ├── folder_c
-*│   └── my_code.py
-```
-
-All of the example code I will provide is going to run from my_code.py.
-
----
-class: middle
-
-# Basic use of the `os` module
-
-```
-*├── my_project                      <----- Running in here
-│   ├── folder_a
-│   │   ├── file_1.txt
-│   │   ├── file_2.txt
-│   │   ├── file_3.txt
-│   │   ├── file_4.txt
-│   │   └── folder_a1
-│   │      └── my_secret.key
-│   ├── folder_b
-│   │   ├── data.csv
-│   │   └── data.json
-│   ├── folder_c
-│   └── my_code.py
-```
-
-Print out the file path where the code is running...
+# "Element Wise" operations in action
 
 ```python
-import os
+import pandas as pd
 
-os.getcwd()     # get current working directory
+a = pd.Series(range(10))         # [0 1 2 3 4 5 6 7 8 9]
+b = pd.Series(range(0, 100, 10)) # [ 0 10 20 30 40 50 60 70 80 90]
+
+*print(a + b)
 ```
 
 ```
-'/Users/brucepucci/Documents/my_project'
+0     0
+1    11
+2    22
+3    33
+4    44
+5    55
+6    66
+7    77
+8    88
+9    99
+dtype: int64
+```
+---
+class: middle
+
+# "Element Wise" operations in action
+
+```python
+import pandas as pd
+
+a = pd.Series(range(10))         # [0 1 2 3 4 5 6 7 8 9]
+b = pd.Series(range(0, 100, 10)) # [ 0 10 20 30 40 50 60 70 80 90]
+
+*print(a * b)
+```
+```
+0      0
+1     10
+2     40
+3     90
+4    160
+5    250
+6    360
+7    490
+8    640
+9    810
+dtype: int64
 ```
 
 ---
 class: middle
 
-# Basic use of the `os` module
-
-```
-*├── my_project                      <----- Running in here
-│   ├── folder_a
-│   │   ├── file_1.txt
-│   │   ├── file_2.txt
-│   │   ├── file_3.txt
-│   │   ├── file_4.txt
-│   │   └── folder_a1
-│   │      └── my_secret.key
-│   ├── folder_b
-│   │   ├── data.csv
-│   │   └── data.json
-│   ├── folder_c
-│   └── my_code.py
-```
-
-List all the files in a directory
+# "Element Wise" operations in action
 
 ```python
-import os
+import pandas as pd
 
-os.listdir()     # list files in current working directory
-```
+a = pd.Series(range(10))         # [0 1 2 3 4 5 6 7 8 9]
+b = pd.Series(range(0, 100, 10)) # [ 0 10 20 30 40 50 60 70 80 90]
 
+*print(a / b)   # Notice Type conversion and error handling
 ```
-['my_code.py', 'folder_b', 'folder_c', 'folder_a']
 ```
+0    NaN
+1    0.1
+2    0.1
+3    0.1
+4    0.1
+5    0.1
+6    0.1
+7    0.1
+8    0.1
+9    0.1
+dtype: float64
+```
+---
+class: middle
+
+# Tables in Pandas are called DataFrames
+
+![](https://pandas.pydata.org/docs/_images/01_table_dataframe1.svg)
+
+You can think of each column of a DataTable as a Series. Every element in a column must be of the same DataType and you can use all of the Series functionality on it.
+
+Every row is an element from every column. They are have the same index.
 
 ---
 class: middle
 
-# Basic use of the `os` module
-
-```
-*├── my_project                      <----- Running in here
-│   ├── folder_a
-│   │   ├── file_1.txt
-│   │   ├── file_2.txt
-│   │   ├── file_3.txt
-│   │   ├── file_4.txt
-│   │   └── folder_a1
-│   │      └── my_secret.key
-│   ├── folder_b
-│   │   ├── data.csv
-│   │   └── data.json
-│   ├── folder_c
-│   └── my_code.py
-```
-
-List all the files in a directory
+# A DataFrame might look something like this...
 
 ```python
-import os
-
-os.listdir('./folder_a')     # We can pass a path to listdir to list that paths files
+                       Name  Age     Sex
+0   Braund, Mr. Owen Harris   22    male
+1  Allen, Mr. William Henry   35    male
+2  Bonnell, Miss. Elizabeth   58  female
 ```
 
-```
-['file_4.txt', 'file_1.txt', 'file_2.txt', 'file_3.txt', 'folder_a1']
-```
+With an associated Excel table that might look like this...
+
+![](https://pandas.pydata.org/docs/_images/01_table_spreadsheet.png)
 
 ---
 class: middle
 
-# Filename Extention
+# To create a DataFrame we essentially just give the constructor a bunch of Series'.
 
-If a file path is an actual file and not a folder it will typically end with a dot and a few characters. This is known as the "filename exxtension" or "file extensions. It doesn't do anything special to the file, it's just a way of communicating what type of file it is. Some examples of file extensions are...
-
-* .html - HTML source file
-* .xlsx - Microsoft Excel file
-* .csv - Comma Separated Values Files
-* .txt - Plain text file
-* .json - JavaScript Object Notation file
-* .py - Python source file
-
----
-class: middle
-
-# "Plain Text"
-
-A file is considered a "plain text" file if it can be read and edited with a simple text editor. Meaning it cannot contain any "meta" information about it's contents.
-
-| Plain Text Files  | Non-Plain Text Files |
-|-------------------|----------------------|
-| Plain Text (.txt) | Rich Text (.rtf)     |
-| Python (.py)      | Executable (.exe)    |
-| JSON (.json)      | Application (.app)   |
-| SQL (.sql)        | Excel (.xlsx)        |
-| HTML (.html)      | Word (.docx)         |
-| CSV (.csv)        | PowerPoint (.pptx)   |
-
-**Why do we care?** It is simple to read and write plain text files using base Python. To read and write other formats we need to use libraries.
-
----
-# File Objects
-
-A file object is a temporary reference to an opened file. When you have an opened file you have the ability to read and/or write to that file. A file object can be saved to a variable and used to do any reading and/or writing using the `open()` built-in function.
+There are a whole bunch of ways to create a DataFrame but the most popular is this dictionary syntax...
 
 ```python
-*my_file = open('my_file.txt', 'r') # Open a file at the relative file path 'my_file.txt'
-*                                 # Access to that file is later available through the my_file identifier
-```
-
----
-# File Objects
-
-A file object is a temporary reference to an opened file. When you have an opened file you have the ability to read and/or write to that file. A file object can be saved to a variable and used to do any reading and/or writing using the `open()` built-in function.
-
-```python
-my_file = open('my_file.txt', 'r')
-*my_contents = my_file.read()    # Read the contents of my_file and store the string in my_contents
-```
-
----
-# File Objects
-
-A file object is a temporary reference to an opened file. When you have an opened file you have the ability to read and/or write to that file. A file object can be saved to a variable and used to do any reading and/or writing using the `open()` built-in function.
-
-```python
-my_file = open('my_file.txt', 'r')
-my_contents = my_file.read()
-*my_file.close()    # It's always a good idea to close a file after you're done with it.
-```
-
----
-class: middle
-
-# The `open()` Function
-
-`open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)`
-
-**Parameters**
-
-* file: The path and name of the file
-* mode: A string, define which mode you want to open the file in:
-  * "r" - Read - Default value. Opens a file for reading, error if the file does not exist
-  * "a" - Append - Opens a file for appending, creates the file if it does not exist
-  * "w" - Write - Opens a file for writing, creates the file if it does not exist
-  * "x" - Create - Creates the specified file, returns an error if the file exist
-
----
-class: middle
-
-# File Object Methods
-
-* `close()` - Closes the file
-  * `my_file.close()`
-* `read()` - Read the file contents to a string
-  * `my_file.read()`
-* `readlines()` - Read the file contents to a list of strings, split by newlines
-  * `my_file.readlines()`
-* `write()` - Write a string to a file
-  * `my_file.write('This string will get written')`
-* `writelines()` - Write a list of strings to a file with newlines in-between elements
-  * `my_file.writelines(['This string will get written', 'So will this one'])`
-
-
----
-
-# Reading and Writing Example
-
-First let's write a file...
-
-```python
-*my_poem = open('my_poem.txt', 'w')   # Create/open a file name my_file.txt
-*                                    # Can only be written to
-```
-
----
-
-# Reading and Writing Example
-
-First let's write a file...
-
-```python
-my_poem = open('my_poem.txt', 'w')
-
-fuzzy_wuzzy = """Fuzzy Wuzzy Was a Bear
-Fuzzy Wuzzy Had no Hair
-Fuzzy Wuzzy Wasn't Fuzzy 
-Was He?
-Was he Bare?"""
-
-*my_poem.write(fuzzy_wuzzy)    # Write fuzzy_wuzzy string to the file
-```
-
----
-
-# Reading and Writing Example
-
-First let's write a file...
-
-```python
-my_poem = open('my_poem.txt', 'w')
-
-fuzzy_wuzzy = """Fuzzy Wuzzy Was a Bear
-Fuzzy Wuzzy Had no Hair
-Fuzzy Wuzzy Wasn't Fuzzy 
-Was He?
-Was he Bare?"""
-
-my_poem.write(fuzzy_wuzzy)
-*my_poem.close()
-```
-
----
-
-# Reading and Writing Example
-
-Now let's read that file...
-
-```python
-* my_poem = open('my_poem.txt', 'r')   # Now we are going to open my_file for reading
-```
-
----
-
-# Reading and Writing Example
-
-Now let's read that file...
-
-```python
-my_poem = open('my_poem.txt', 'r')
-*contents = my_poem.read()   # Read the text from the file
-```
-
----
-
-# Reading and Writing Example
-
-Now let's read that file...
-
-```python
-my_poem = open('my_poem.txt', 'r')
-contents = my_poem.read()
-*my_poem.close()
-*print(contents)
-```
-
-```
-Fuzzy Wuzzy Was a Bear
-Fuzzy Wuzzy Had no Hair
-Fuzzy Wuzzy Wasn't Fuzzy 
-Was He?
-Was he Bare?
-```
-
----
-
-# Reading and Writing Example
-
-Now let's read that file in a slightly different way...
-
-```python
-my_poem = open('my_poem.txt', 'r')
-*contents = my_poem.readlines()    # readlines() instead
-my_poem.close()
-print(contents)
-```
-
-```
-['Fuzzy Wuzzy Was a Bear\n', 'Fuzzy Wuzzy Had no Hair\n', "Fuzzy Wuzzy Wasn't Fuzzy \n", 'Was He?\n', 'Was he Bare?']
-```
-
----
-
-# Reading and Writing Example
-
-Appending to a file? 
-
-```python
-my_poem = open('my_poem.txt', 'w')    # Reopen for writing
-*my_poem.write('Lalala')
-my_poem.close()
-
-my_poem = open('my_poem.txt', 'r')    # Reopen for reading
-contents = my_poem.read()
-my_poem.close()
-
-print(contents)    # We wrote over our old text
-```
-
-```
-Lalala
-```
-
----
-
-# Reading and Writing Example
-
-Appending to a file.
-
-```python
-my_poem = open('my_poem.txt', 'a')    # If we would have put a 'a' it would have appended to the end instead
-*my_poem.write('Lalala')
-my_poem.close()
-
-my_poem = open('my_poem.txt', 'r')    # Reopen for reading
-contents = my_poem.read()
-my_poem.close()
-
-print(contents)    # We wrote over our old text
-```
-
-```
-Fuzzy Wuzzy Was a Bear
-Fuzzy Wuzzy Had no Hair
-Fuzzy Wuzzy Wasn't Fuzzy 
-Was He?
-Was he Bare?Lalala
-```
-
----
-# JavaScript Object Notation (JSON)
-
-JSON is a file specification used for sharing data. Information is stored in plain text and it is widely used across many programming languages.
-
-The JSON format is syntactically identical to the code for creating JavaScript objects. It actually looks a little like Python dictionaries as well...
-
-```json
-{
-  "name": "Zophie",
-  "isCat": true, 
-  "miceCaught": 0,
-  "napsTaken": 37.5, 
-  "felineIQ": null
-}
-```
-
----
-# JavaScript Object Notation (JSON)
-
-JSON is a file specification used for sharing data. Information is stored in plain text and it is widely used across many programming languages.
-
-The JSON format is syntactically identical to the code for creating JavaScript objects. It actually looks a little like Python dictionaries as well...
-
-```json
-{
-  "name": "Zophie",
-  "isCat": true, 
-  "miceCaught": 0,
-  "napsTaken": 37.5, 
-  "felineIQ": null
-}
-```
-
-... OK, it actually looks a lot like Python ...
-
-All we have to change is the capitalization of `true` and `null` to `None`
-
----
-# JSON support in Python
-
-Python provides a JSON library which allows you to write convert Python objects to JSON and back. It also provides support to write those objects to files.
-
-```python
-* import json   # Bring in the json library from the standard lib
-```
-
----
-# JSON support in Python
-
-Python provides a JSON library which allows you to write convert Python objects to JSON and back. It also provides support to write those objects to files.
-
-```python
-import json
-
-my_cat = {
-  "name": "Zophie",
-  "isCat": True,
-  "miceCaught": 0,
-  "napsTaken": 37.5,
-  "felineIQ": None
-}
-
-*json.dumps(my_cat)    # "dumps" aka dump string
-*                     # encodes a Python object as a json string
-```
-
-```
-'{"name": "Zophie", "isCat": true, "miceCaught": 0, "napsTaken": 37.5, "felineIQ": null}'
-```
-
----
-# JSON support in Python
-
-Python provides a JSON library which allows you to write convert Python objects to JSON and back. It also provides support to write those objects to files.
-
-```python
-import json
-
-my_json = '{"name": "Zophie", "isCat": true, "miceCaught": 0, "napsTaken": 37.5, "felineIQ": null}'
-
-*my_cat = json.reads(my_json)    # "reads" aka read string
-*                               # decodes a JSON string into a python object
-```
-
----
-# JSON support in Python
-
-Python provides a JSON library which allows you to write convert Python objects to JSON and back. It also provides support to write those objects to files.
-
-```python
-import json
-
-my_json = '{"name": "Zophie", "isCat": true, "miceCaught": 0, "napsTaken": 37.5, "felineIQ": null}'
-
-my_cat = json.reads(my_json)
-
-type(my_cat)
-```
-
-```
-<class 'dict'>
-```
-
----
-# JSON support in Python
-
-Python provides a JSON library which allows you to write convert Python objects to JSON and back. It also provides support to write those objects to files.
-
-```python
-import json
-
-my_json = '{"name": "Zophie", "isCat": true, "miceCaught": 0, "napsTaken": 37.5, "felineIQ": null}'
-
-my_cat = json.reads(my_json)
-
-*my_cat
-```
-
-```
-{'name': 'Zophie', 'isCat': True, 'miceCaught': 0, 'napsTaken': 37.5, 'felineIQ': None}
-```
-
----
-# JSON support in Python
-
-Python provides a JSON library which allows you to write convert Python objects to JSON and back. It also provides support to write those objects to files.
-
-```python
-import json
-
-my_json = '{"name": "Zophie", "isCat": true, "miceCaught": 0, "napsTaken": 37.5, "felineIQ": null}'
-
-my_cat = json.reads(my_json)
-
-*my_cat['name']
-```
-
-```
-'Zophie'
-```
-
----
-# We can encode any basic Python datatype as JSON
-
-```python
-json.dumps('Hello')
-```
-```
-'"Hello"'
-```
-
-```python
-json.dumps(['This', 'is', 'my', 'list'])
-```
-```
-'["This", "is", "my", "list"]'
-```
-
-```python
-json.dumps(('This', 'is', 'my', 'tuple'))   # tuples don't exist in json so it uses a list
-                                            # It'll be a list when we decode it back
-```
-```
-'["This", "is", "my", "tuple"]'
-```
-
----
-# JSON is plain text... This means we can store it in a file.
-
-The `json` package actually provides some nice functionality to do this. Just use `dump` and `read` instead of `dumps` and `reads` and pass in a file object.
-
-```python
-
-my_cat = {
-  "name": "Zophie",
-  "isCat": True,
-  "miceCaught": 0,
-  "napsTaken": 37.5,
-  "felineIQ": None
-}
-
-*file = open('my_cat.json', 'w')    # open a file to write to
-```
-
----
-# JSON is plain text... This means we can store it in a file.
-
-The `json` package actually provides some nice functionality to do this. Just use `dump` and `read` instead of `dumps` and `reads` and pass in a file object.
-
-```python
-
-my_cat = {
-  "name": "Zophie",
-  "isCat": True,
-  "miceCaught": 0,
-  "napsTaken": 37.5,
-  "felineIQ": None
-}
-
-file = open('my_cat.json', 'w')
-json.dump(my_cat, file)    # write my_cat to file in json form
-file.close()
-```
-
-my_cat.json file contains
-```
-{"name": "Zophie", "isCat": true, "miceCaught": 0, "napsTaken": 37.5, "felineIQ": null}
-```
-
----
-# JSON is plain text... This means we can store it in a file.
-
-The `json` package actually provides some nice functionality to do this. Just use `dump` and `read` instead of `dumps` and `reads` and pass in a file object.
-
-```python
-*file = open('my_cat.json', 'r')      # open my_cat.json file to read from
-```
-
----
-# JSON is plain text... This means we can store it in a file.
-
-The `json` package actually provides some nice functionality to do this. Just use `dump` and `read` instead of `dumps` and `reads` and pass in a file object.
-
-```python
-file = open('my_cat.json', 'r')
-*my_cat = json.load(file)     # Read the json string into my cat as a dictionary
-*file.close()
-
-print(my_cat)
-```
-
-```
-{'name': 'Zophie', 'isCat': True, 'miceCaught': 0, 'napsTaken': 37.5, 'felineIQ': None}
+df = pd.DataFrame({
+    "Name": ["Braund, Mr. Owen Harris",
+             "Allen, Mr. William Henry",
+             "Bonnell, Miss. Elizabeth"],
+   "Age": [22, 35, 58],
+   "Sex": ["male", "male", "female"]
+})
 ```
 		</textarea>
 		<script>require=(function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require=="function"&&require;if(!s&&o)return o(n,!0);if(r)return r(n,!0);throw new Error("Cannot find module '"+n+"'")}var u=t[n]={exports:{}};e[n][0].call(u.exports,function(t){var r=e[n][1][t];return i(r?r:t)},u,u.exports)}return t[n].exports}var r=typeof require=="function"&&require;for(var s=0;s<n.length;s++)i(n[s]);return i})({"components/printing":[function(require,module,exports){
