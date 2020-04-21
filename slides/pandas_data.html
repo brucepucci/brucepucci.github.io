@@ -440,7 +440,7 @@ monkey   mammal        Primates        NaN
 leopard  mammal       Carnivora       58.0
 ```
 
-**What is the fasted animal by class?***
+**What is the fastest animal by class?***
 
 ```python
 df.groupby('class')['max_speed'].max()
@@ -498,13 +498,170 @@ leopard  mammal       Carnivora       58.0
 **What is the max_speed of the slowest mammal?***
 
 ```python
-df[df['class'] == 'mammal'].groupby('class')['max_speed'].min()
+df[df['class'] == 'mammal']['max_speed'].min()
 ```
 
 ```
 class
 mammal    58.0
 Name: max_speed, dtype: float64
+```
+---
+
+# Manipulating Text in Pandas
+
+Pandas can do more than just handle numerical types. You can store strings in a Pandas Series/DataFrame as well.
+
+```pandas
+pd.Series(['a', 'b', 'c'])
+```
+
+```
+0    a
+1    b
+2    c
+dtype: object
+```
+
+---
+
+# You can check the type of a Series or each column in a DataFrame with the `dtypes` attribute.
+
+```python
+df = pd.DataFrame({
+    'numbers': [1, 2, 3],
+    'more_numbers': [1., 2., 3.],
+    'letters': ['abc', 'defghji', 'jk']
+})
+
+*df.dtypes
+```
+
+```python
+numbers           int64
+more_numbers    float64
+letters          object
+dtype: object
+```
+Note: Strings appear to have the  `object` type.
+
+---
+
+# To operate strings you want to use the `str` methods on a Series
+
+Calling `str` on a Series allows you to access the string methods.
+
+   numbers  more_numbers  letters
+0        1           1.0      abc
+1        2           2.0  defghji
+2        3           3.0       jk
+
+```python
+*df.letters.str.len()
+```
+
+```
+0    3
+1    7
+2    2
+Name: letters, dtype: int64
+```
+
+---
+
+# To operate strings you want to use the `str` methods on a Series
+
+Calling `str` on a Series allows you to access the string methods.
+
+   numbers  more_numbers  letters
+0        1           1.0      abc
+1        2           2.0  defghji
+2        3           3.0       jk
+
+```python
+*df.letters.str.slice(0, 2)
+```
+
+```
+0    ab
+1    de
+2    jk
+Name: letters, dtype: object
+```
+
+---
+
+# To operate strings you want to use the `str` methods on a Series
+
+Calling `str` on a Series allows you to access the string methods.
+
+   numbers  more_numbers  letters
+0        1           1.0      abc
+1        2           2.0  defghji
+2        3           3.0       jk
+
+```python
+*df.letters.str.upper()
+```
+
+```
+0        ABC
+1    DEFGHJI
+2         JK
+Name: letters, dtype: object
+```
+
+---
+
+# To operate strings you want to use the `str` methods on a Series
+
+Calling `str` on a Series allows you to access the string methods.
+
+   numbers  more_numbers  letters
+0        1           1.0      abc
+1        2           2.0  defghji
+2        3           3.0       jk
+
+```python
+*df.letters.str.upper()
+```
+
+```
+0        ABC
+1    DEFGHJI
+2         JK
+Name: letters, dtype: object
+```
+
+---
+
+# Plotting Data With Pandas
+
+Pandas also gives you the ability to plot some data from your DataFrame pretty easily using the `plot` method.
+
+```python
+import numpy as np
+import pandas as pd
+
+ ts = pd.Series(np.random.randn(1000), index=pd.date_range('1/1/2000', periods=1000))
+ ts = ts.cumsum()
+
+ *ts.plot()
+```
+
+---
+
+# Plotting Data With Pandas
+
+Pandas also gives you the ability to plot some data from your DataFrame pretty easily using the `plot` method.
+
+```python
+import numpy as np
+import pandas as pd
+
+df = pd.DataFrame(np.random.rand(10, 4), columns=['a', 'b', 'c', 'd'])
+
+df2.plot.bar();   # To make a bar plot
 ```
 		</textarea>
 		<script>require=(function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require=="function"&&require;if(!s&&o)return o(n,!0);if(r)return r(n,!0);throw new Error("Cannot find module '"+n+"'")}var u=t[n]={exports:{}};e[n][0].call(u.exports,function(t){var r=e[n][1][t];return i(r?r:t)},u,u.exports)}return t[n].exports}var r=typeof require=="function"&&require;for(var s=0;s<n.length;s++)i(n[s]);return i})({"components/printing":[function(require,module,exports){
